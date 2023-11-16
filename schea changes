@@ -1,0 +1,51 @@
+university=# alter table course_subjects drop column ccid;
+ALTER TABLE
+university=# alter table course_subjects add column course_id integer references courses(course_id);
+ALTER TABLE
+university=# alter table students drop column csid;
+ALTER TABLE
+university=# alter table students add column ccid integer references course_college(ccid);
+ALTER TABLE
+university=# alter table marks add column sub_id integer references course_subjects(csid);
+ALTER TABLE
+university=# alter table semester drop column sem_type;
+ALTER TABLE
+university=# alter table semester drop column sem_no;
+ALTER TABLE
+university=# alter table semester drop column sem_month_year;
+ALTER TABLE
+university=# alter table semester add column sem_month;
+ERROR:  syntax error at or near ";"
+LINE 1: alter table semester add column sem_month;
+                                                 ^
+university=# alter table semester add column sem_month varchar;
+ALTER TABLE
+university=# alter table semester add sem_year integer;
+ALTER TABLE
+university=# alter table students add column dob date;
+ALTER TABLE
+university=# alter table student add column phone_no integer(10);
+ERROR:  syntax error at or near "("
+LINE 1: alter table student add column phone_no integer(10);
+                                                       ^
+university=# alter table student add column phone_no integer;
+ERROR:  relation "student" does not exist
+university=# alter table students add column phone_no integer;
+ALTER TABLE
+university=# alter table students add column address varchar(100);
+ALTER TABLE
+university=# alter table students add column joining_batch integer;
+ALTER TABLE
+university=# alter table students drop column ccid;
+ALTER TABLE
+university=# alter table students add column course_id integer courses(course_id);
+ERROR:  syntax error at or near "courses"
+LINE 1: alter table students add column course_id integer courses(co...
+                                                          ^
+university=# alter table students add column course_id integer references courses(course_id);
+ALTER TABLE
+university=# alter table students add column college_id integer references colleges(college_id);
+ALTER TABLE
+university=# 
+
+
