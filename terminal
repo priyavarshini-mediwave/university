@@ -1,86 +1,45 @@
 ➜  ~ docker ps -a
-CONTAINER ID   IMAGE      COMMAND                  CREATED        STATUS                    PORTS                                       NAMES
-d91ee5de8984   postgres   "docker-entrypoint.s…"   2 months ago   Up 2 hours                0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   local-dev-postgres
-32c6bf5d4427   mongo      "docker-entrypoint.s…"   2 months ago   Exited (0) 2 months ago                                               local-dev-mongo
+
 ➜  ~ docker exec -it d91ee5de8984 bash
 root@d91ee5de8984:/# psql -U postgres
-psql (15.4 (Debian 15.4-1.pgdg120+1))
-Type "help" for help.
 
 postgres=# create database University;
 CREATE DATABASE
-postgres=# \dt
-         List of relations
- Schema | Name  | Type  |  Owner   
---------+-------+-------+----------
- public | likes | table | postgres
- public | posts | table | postgres
- public | users | table | postgres
-(3 rows)
+
 
 postgres=# \l
-                                                 List of databases
-    Name    |  Owner   | Encoding |  Collate   |   Ctype    | ICU Locale | Locale Provider |   Access privileges   
-------------+----------+----------+------------+------------+------------+-----------------+-----------------------
- knowlikes  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            | 
- postgres   | postgres | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            | 
- template0  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            | =c/postgres          +
-            |          |          |            |            |            |                 | postgres=CTc/postgres
- template1  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            | =c/postgres          +
-            |          |          |            |            |            |                 | postgres=CTc/postgres
- university | postgres | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            | 
-(5 rows)
-
+                                               
 postgres=# \c university
-You are now connected to database "university" as user "postgres".
-university=# create table colleges;
-ERROR:  syntax error at or near ";"
-LINE 1: create table colleges;
-                             ^
-university=# create table colleges();
-CREATE TABLE
-university=# drop table colleges;
-DROP TABLE
+
 university=# create table colleges(college_id serial not null primary key ,college_name varchar);
-CREATE TABLE
+
 university=# create table courses(course_id serial not null primary key , course_name varchar);
-CREATE TABLE
+
 university=# create table course_college(ccid serial not null primary key,course_id integer references courses(course_id),clg_id integer references colleges(college_id));
-CREATE TABLE
+
 university=# create table subjects(subject_id serial not null primary key,subject_name varchar);
-CREATE TABLE
-university=# create table course_subjects(csid seial not null primary key,course_id integer references courses(course_id),sub_id integer references subjects(subject_id)); 
-ERROR:  type "seial" does not exist
-LINE 1: create table course_subjects(csid seial not null primary key...
-                                          ^
+
+                                         ^
 university=# create table course_subjects(csid serial not null primary key,course_id integer references courses(course_id),sub_id integer references subjects(subject_id)); 
-CREATE TABLE
-university=# create table students(std_id serial not null primary key,std_name varchar,course_clg_id integer references course_college(ccid));
-CREATE TABLE
-university=# drop table students;
-DROP TABLE
+
+
 university=# create table semester(sem_id serial not null primary key,sem_no integer not null);
-CREATE TABLE
-university=# alter table course_subjects add column ccid references course_college(ccid);
-ERROR:  syntax error at or near "references"
-LINE 1: alter table course_subjects add column ccid references cours...
-                                                    ^
+
+                                                   ^
 university=# alter table course_subjects add column ccid integer references course_college(ccid);
-ALTER TABLE
+
 university=# alter table course_subjects drop column course_id;
-ALTER TABLE
+
 university=# create table students (std_id serial not null primary key,std_name varchar,csid integer references course_subjects(csid));
-CREATE TABLE
+
 university=# create table marks(mark_id serial not null primary key,std_id integer references students(std_id),sem_id integer references semester(sem_id),marks integer);
-CREATE TABLE
-university=# alter table semester add column sem_type(varchar);
-ERROR:  syntax error at or near "("
-LINE 1: alter table semester add column sem_type(varchar);
+
+
                                                 ^
 university=# alter table semester add column sem_type varchar;
-ALTER TABLE
+
 university=# alter table semester add column sem_month_year varchar;
-ALTER TABLE
-university=# 
+
+
 
 

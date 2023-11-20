@@ -86,10 +86,16 @@ group by m.std_id,s.std_name , c.college_name,c.college_id,c2.course_name) stude
 where ranking = 1 order by average_marks desc;
 
 --7.
+--SELECT s2.subject_name, COUNT(m.std_id) AS num_failed_students
+--FROM marks m
+--JOIN subjects s2  ON m.sub_id  = s2.subject_id
+--WHERE m.marks < 30 or m.marks is null 
+--GROUP BY s2.subject_name;
+
 SELECT s2.subject_name, COUNT(m.std_id) AS num_failed_students
 FROM marks m
 JOIN subjects s2  ON m.sub_id  = s2.subject_id
-WHERE m.marks < 30 or m.marks is null 
+WHERE m.marks < 30 
 GROUP BY s2.subject_name;
 
 --insert into marks (std_id,sem_id,marks,sub_id) values (7,1,25,5);
@@ -109,3 +115,10 @@ LEFT JOIN marks m ON s.std_id  = m.std_id
 WHERE m.marks = -1 OR m.marks IS NULL
 group by s.std_name ,s.std_id ;
 
+--insert into students (std_name,dob,phone_no,address,joining_batch,course_id,college_id)values('Ram','2002-11-20',9876543210,'Trichy',2020,7,3)
+--insert into marks (std_id,sem_id,marks,sub_id) values (11,1,98,21),(11,1,99,22),(11,1,97,23),(11,1,100,24)
+--update marks set marks=99 where mark_id=2;
+--update marks set marks=99 where mark_id=5;
+--update marks set marks=99 where mark_id=1;
+--insert into students (std_name,dob,phone_no,address,joining_batch,course_id,college_id)values('Radha','2002-11-22',9876543211,'Tirunelveli',2020,1,2)
+--insert into marks (std_id,sem_id,marks,sub_id) values (12,1,55,5),(12,1,35,6)

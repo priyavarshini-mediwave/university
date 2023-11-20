@@ -60,10 +60,7 @@ university=# insert into course_subjects(sub_id,course_id) values(5,1),(6,1),(7,
 INSERT 0 3
 university=# insert into course_subjects(sub_id,course_id) values(8,2),(9,2),(10,2);
 INSERT 0 3
-university=# insert into course_subjects(sub_id,course_id) values(1,3),(2,3),(11,3),(12.3),(13,3);
-ERROR:  VALUES lists must all be the same length
-LINE 1: ...jects(sub_id,course_id) values(1,3),(2,3),(11,3),(12.3),(13,...
-                                                             ^
+                                                            ^
 university=# insert into course_subjects(sub_id,course_id) values(1,3),(2,3),(11,3),(12,3),(13,3);
 INSERT 0 5
 university=# insert into course_subjects(sub_id,course_id) values(14,3);
@@ -154,10 +151,7 @@ university=# INSERT INTO marks (std_id,sem_id,marks,sub_id) values (1,1,80,26),(
 INSERT 0 2
 university=# INSERT INTO marks (std_id,sem_id,marks,sub_id) values (1,1,89,28);
 INSERT 0 1
-university=# delete * from marks where mark_id=3;
-ERROR:  syntax error at or near "*"
-LINE 1: delete * from marks where mark_id=3;
-               ^
+               
 university=# delete from marks where mark_id=3;
 DELETE 1
 university=# INSERT INTO marks (std_id,sem_id,marks,sub_id) values (2,1,91,21);
@@ -190,8 +184,16 @@ university=# insert into course_subjects(sub_id,course_id) values(3,10);
 INSERT 0 1
 university=# INSERT INTO marks (std_id,sem_id,marks,sub_id) values (10,1,87,3),(10,1,66,4);
 INSERT 0 2
-university=# 
+insert into marks (std_id,sem_id,marks,sub_id) values (7,1,25,5);
+insert into marks (std_id,sem_id,marks,sub_id) values (7,1,-1,6);
 
+insert into students (std_name,dob,phone_no,address,joining_batch,course_id,college_id)values('Ram','2002-11-20',9876543210,'Trichy',2020,7,3)
+insert into marks (std_id,sem_id,marks,sub_id) values (11,1,98,21),(11,1,99,22),(11,1,97,23),(11,1,100,24)
+update marks set marks=99 where mark_id=2;
+update marks set marks=99 where mark_id=5;
+update marks set marks=99 where mark_id=1;
+insert into students (std_name,dob,phone_no,address,joining_batch,course_id,college_id)values('Radha','2002-11-22',9876543211,'Tirunelveli',2020,1,2)
+insert into marks (std_id,sem_id,marks,sub_id) values (12,1,55,5),(12,1,35,6)
 
 
 
